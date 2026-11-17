@@ -67,4 +67,44 @@ private fun updateAppWidget(context: Context, appWidgetManager: AppWidgetManager
         
         val (currentMl, goalMl, streak) = withContext(Dispatchers.IO) {
             var total = 0f
-            repository.getTotalHydrationForDate(today).collect { total =
+            repository.getTotalHydrationForDate(today).collect { total = it }
+            val goal = repository.getOrCreateDailyGoal(today, repository.getBaseGoal(), false, null)
+            val streak = repository.calculateStreak()
+            Triple(total.toInt(), goal.adjustedGoalMl, streak)
+        }
+        
+        val progress = ((currentMl.toFloat() / goalMl) * 100).toInt().coerceIn(0, 100)
+        
+        val views = RemoteViews(context.packageName, R.layout.widget_hydration)
+        views.setTextViewText(R.id.widget_progress_text, "$currentMl / $goalMl ml")
+        views.setTextViewText(R.id.widget_streak, "Streak: $streak")
+        views.setProgressBar(R.id.widget_progress_bar, 100, progress, false)
+        
+        val openAppIntent = Intent(context, MainActivity::class.java)
+        val openAppPendingIntent = PendingIntent.getActivity(
+            context, 0, openAppIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+        views.setOnClickPendingIntent(R.id.widget_title, openAppPendingIntent)
+        
+        val add250Intent = Intent(context, HydrationWidgetProvider::class.java).apply {
+            action = HydrationWidgetProvider.ACTION_ADD_250
+        }
+        val add250PendingIntent = PendingIntent.getBroadcast(
+            context, 1, add250Intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+        views.setOnClickPendingIntent(R.id.widget_btn_250, add250PendingIntent)
+        
+        val add500Intent = Intent(context, HydrationWidgetProvider::class.java).apply {
+            action = HydrationWidgetProvider.ACTION_ADD_500
+        }
+        val add500PendingIntent = PendingIntent.getBroadcast(
+            context, 2, add500Intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+        views.setOnClickPendingIntent(R.id.widget_btn_500, add500PendingIntent)
+        
+        appWidgetManager.updateAppWidget(appWidgetId, views)
+    }
+}
