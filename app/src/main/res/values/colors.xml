@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="deep_navy">#0F1419</color>
+    <color name="midnight_blue">#1A1F2E</color>
+    <color name="neon_blue">#4FC3F7</color>
+    <color name="neon_purple">#BA68C8</color>
+    <color name="neon_cyan">#00E5FF</color>
+    <color name="text_primary">#F5F5F7</color>
+    <color name="success_green">#4ADE80</color>
+</resources>
