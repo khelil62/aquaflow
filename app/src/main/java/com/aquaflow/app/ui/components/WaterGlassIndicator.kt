@@ -54,7 +54,7 @@ fun WaterGlassIndicator(
             lineTo(width * 0.85f, height)
             lineTo(width * 0.15f, height)
             close()
-        }
+          }
         
         drawPath(path = glassShape, color = Color(0x1AFFFFFF), style = Fill)
         
@@ -63,9 +63,11 @@ fun WaterGlassIndicator(
         
         val waterPath = androidx.compose.ui.graphics.Path().apply {
             moveTo(width * 0.1f, waterTop)
-            for (x in (width * 0.1f)..(width * 0.9f) step 2f) {
-                val waveY = waterTop + sin((x / width * 4 + time).toDouble()).toFloat() * 8f
-                lineTo(x, waveY)
+            var x = width * 0.1f
+            while (x <= width * 0.9f) {
+                  val waveY = waterTop + sin((x / width * 4 + time).toDouble()).toFloat() * 8f
+                  lineTo(x, waveY)
+                 x += 2f
             }
             lineTo(width * 0.9f, waterTop)
             lineTo(width * 0.85f, height)
