@@ -25,7 +25,7 @@ class HistoryViewModel(private val repository: HydrationRepository) : ViewModel(
             val dailyData = mutableListOf<DailyData>()
             
             for (i in 0..29) {
-                val date = endDate.minusDays(i)
+                val date = endDate.minusDays(i.tolong())
                 val dateStr = date.format(dateFormatter)
                 val total = repository.getHydrationForRange(dateStr, dateStr)
                 val goal = repository.getOrCreateDailyGoal(dateStr, repository.getBaseGoal(), false, null)
