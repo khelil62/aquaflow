@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AquaFlow</string>
+    <string name="day_streak">Jour %d 🔥</string>
+    <string name="temperature_adjustment">%d°C → +20%%</string>
+    <string name="drink_water">Eau</string>
+    <string name="drink_coffee">Café</string>
+    <string name="drink_tea">Thé</string>
+    <string name="history_title">30 derniers jours</string>
+    <string name="settings_title">Paramètres</string>
+</resources>
