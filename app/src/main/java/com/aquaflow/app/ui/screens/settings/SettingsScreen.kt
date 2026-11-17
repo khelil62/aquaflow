@@ -97,4 +97,9 @@ fun SettingsScreen(viewModel: SettingsViewModel = viewModel()) {
 }
 
 @Composable
-private fun SettingsSection
+private fun SettingsSection(title: String, content: @Composable ColumnScope.() -> Unit) {
+    Column {
+        Text(text = title, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold, modifier = Modifier.padding(bottom = 8.dp))
+        content()
+    }
+}
