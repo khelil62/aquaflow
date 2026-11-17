@@ -92,7 +92,7 @@ fun SettingsScreen(viewModel: SettingsViewModel = viewModel()) {
         }
         
         Spacer(modifier = Modifier.height(32.dp))
-        Text(text = "AquaFlow v1.0.0", style = MaterialTheme.typography.bodySmall, color = TextSecondary, modifier = Modifier.align(Alignment.CenterHorizontally))
+        Text(text = "AquaFlow v1.0.0", style = MaterialTheme.typography.bodySmall, color = TextSecondary)
     }
 }
 
